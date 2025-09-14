@@ -22,18 +22,19 @@ const Projects = () => {
     },
     {
       title: 'ToDo List Website',
-      description: 'A feature-rich task management application with a clean, user-friendly interface. Includes task categorization, priority levels, and deadline tracking to boost productivity.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'Local Storage'],
+      description: 'A comprehensive task management application featuring dual modes - Simple Todo for everyday tasks and Advanced TaskFlow Pro for project management. Built with modern web technologies and AI assistance.',
+      technologies: ['React', 'TypeScript', 'Vite', 'Tailwind CSS', 'Lovable AI'],
       icon: Code,
       gradient: 'from-sky-primary to-sky-light',
       features: [
-        'Task creation and editing',
-        'Priority level assignment',
-        'Deadline management',
-        'Data persistence'
+        'Dual mode interface (Simple & Advanced)',
+        'Task categorization with tags',
+        'Priority levels and due dates',
+        'Progress tracking & analytics',
+        'Multiple view options (List, Grid, Calendar)'
       ],
-      codeUrl: 'https://github.com/veerabhadra05/VibeCoding',
-      liveUrl: '#'
+      codeUrl: 'https://github.com/veerabhadra05/VibeCoding/tree/main/ToDo_List_App',
+      liveUrl: 'https://todo-list-by-veera.lovable.app/'
     }
   ];
 
