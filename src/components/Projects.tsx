@@ -6,15 +6,16 @@ const Projects = () => {
   const projects = [
     {
       title: 'Credits Management Website',
-      description: 'A comprehensive web application for managing academic credits and course tracking. Built with modern web technologies to provide students with an intuitive interface for monitoring their academic progress.',
+      description: 'A comprehensive financial management application for tracking money lending and borrowing relationships between individuals. Features a modern dashboard for managing receivables, payables, and calculating net financial position.',
       technologies: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
       icon: Database,
       gradient: 'from-orange-primary to-orange-light',
       features: [
-        'User authentication system',
-        'Credit tracking dashboard',
-        'Course management interface',
-        'Progress visualization'
+        'Customer & creditor management',
+        'Money to receive/pay tracking',
+        'Financial overview dashboard',
+        'Transaction history & due dates',
+        'Real-time balance calculations'
       ]
     },
     {
