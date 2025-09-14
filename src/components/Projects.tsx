@@ -7,7 +7,7 @@ const Projects = () => {
     {
       title: 'Credits Management Website',
       description: 'A comprehensive financial management application for tracking money lending and borrowing relationships between individuals. Features a modern dashboard for managing receivables, payables, and calculating net financial position.',
-      technologies: ['HTML', 'CSS', 'JavaScript', 'MySQL'],
+      technologies: ['React', 'Vite', 'TypeScript', 'Tailwind CSS'],
       icon: Database,
       gradient: 'from-orange-primary to-orange-light',
       features: [
@@ -16,7 +16,9 @@ const Projects = () => {
         'Financial overview dashboard',
         'Transaction history & due dates',
         'Real-time balance calculations'
-      ]
+      ],
+      codeUrl: 'https://github.com/veerabhadra05/VibeCoding/tree/main/Customer_Credits_Management_App',
+      liveUrl: 'https://creditsmanagement.netlify.app/'
     },
     {
       title: 'ToDo List Website',
@@ -29,7 +31,9 @@ const Projects = () => {
         'Priority level assignment',
         'Deadline management',
         'Data persistence'
-      ]
+      ],
+      codeUrl: 'https://github.com/veerabhadra05/VibeCoding',
+      liveUrl: '#'
     }
   ];
 
@@ -66,6 +70,8 @@ const Projects = () => {
                           size="sm" 
                           variant="secondary"
                           className="bg-white/20 hover:bg-white/30 text-white border-0"
+                          onClick={() => window.open(project.codeUrl, '_blank')}
+                          disabled={!project.codeUrl}
                         >
                           <Github className="w-4 h-4 mr-2" />
                           Code
@@ -74,6 +80,8 @@ const Projects = () => {
                           size="sm" 
                           variant="secondary"
                           className="bg-white/20 hover:bg-white/30 text-white border-0"
+                          onClick={() => window.open(project.liveUrl, '_blank')}
+                          disabled={!project.liveUrl}
                         >
                           <ExternalLink className="w-4 h-4 mr-2" />
                           Live
