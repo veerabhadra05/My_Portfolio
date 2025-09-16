@@ -188,13 +188,6 @@ const Contact = () => {
                     Send Message
                   </Button>
                 </form>
-
-                <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-                  <p className="text-sm text-gray-600 text-center">
-                    <strong>Note:</strong> Contact form functionality requires backend integration. 
-                    For now, please use the email address above to reach me directly.
-                  </p>
-                </div>
               </CardContent>
             </Card>
           </div>
