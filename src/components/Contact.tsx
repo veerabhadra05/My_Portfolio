@@ -12,20 +12,46 @@ const Contact = () => {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    // Since we need Supabase for backend functionality, show a message about the integration
-    toast({
-      title: "Contact Form Submission",
-      description: "To enable email functionality, please connect this project to Supabase using the integration in the top-right corner of Lovable.",
-      duration: 5000,
-    });
+    setIsSubmitting(true);
 
-    // For now, we'll just reset the form
-    setFormData({ name: '', email: '', message: '' });
+    try {
+      const response = await fetch('https://ayezayunrounkxnekubl.supabase.co/functions/v1/contact-form', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: result.message,
+          duration: 5000,
+        });
+        // Reset the form
+        setFormData({ name: '', email: '', message: '' });
+      } else {
+        throw new Error(result.error || 'Failed to send message');
+      }
+    } catch (error: any) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error Sending Message",
+        description: error.message || "There was an error sending your message. Please try again or contact me directly via email.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -182,10 +208,11 @@ const Contact = () => {
 
                   <Button
                     type="submit"
-                    className="w-full bg-gradient-to-r from-orange-primary to-sky-primary hover:from-orange-dark hover:to-sky-dark text-white py-3 text-lg font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
+                    disabled={isSubmitting}
+                    className="w-full bg-gradient-to-r from-orange-primary to-sky-primary hover:from-orange-dark hover:to-sky-dark text-white py-3 text-lg font-semibold rounded-lg transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                   >
                     <Send className="w-5 h-5 mr-2" />
-                    Send Message
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
                   </Button>
                 </form>
               </CardContent>
