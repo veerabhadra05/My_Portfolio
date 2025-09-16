@@ -46,7 +46,7 @@ const Contact = () => {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 73307*****',
+      value: '+91 7330776100',
       href: 'tel:+917330776100',
       color: 'sky-primary'
     },
