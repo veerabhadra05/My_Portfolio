@@ -3,12 +3,12 @@ import { Card, CardContent } from '@/components/ui/card';
 
 const About = () => {
   const technicalSkills = [
-    { name: 'Python', icon: Code, level: 90 },
-    { name: 'Java', icon: Code, level: 85 },
-    { name: 'JavaScript', icon: Code, level: 80 },
-    { name: 'HTML & CSS', icon: Code, level: 95 },
-    { name: 'SQL & MySQL', icon: Database, level: 85 },
-    { name: 'C Programming', icon: Code, level: 80 },
+    { name: 'Python', icon: Code },
+    { name: 'Java', icon: Code },
+    { name: 'JavaScript', icon: Code },
+    { name: 'HTML & CSS', icon: Code },
+    { name: 'SQL & MySQL', icon: Database },
+    { name: 'C Programming', icon: Code },
   ];
 
   const softSkills = [
@@ -26,9 +26,9 @@ const About = () => {
             About <span className="text-orange-primary">Me</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            I'm a passionate B.Tech student specializing in Computer Science and Engineering, 
-            currently studying at St. John's College of Engineering & Technology. 
-            I love turning complex problems into simple, beautiful solutions.
+            I'm an enthusiastic B.Tech student specializing in Computer Science and Engineering, 
+            currently studying at St. Johns College of Engineering & Technology(JNTUA). 
+            I enjoy turning complex problems into simple, beautiful solutions.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ const About = () => {
                       Computer Science & Engineering
                     </p>
                     <p className="text-gray-600">
-                      St. John's College of Engineering & Technology
+                      St. Johns College of Engineering & Technology(JNTUA)
                     </p>
                   </div>
                 </div>
@@ -87,22 +87,13 @@ const About = () => {
                   <span className="w-3 h-3 bg-orange-primary rounded-full mr-3"></span>
                   Technical Skills
                 </h3>
-                <div className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
                   {technicalSkills.map((skill, index) => (
-                    <div key={index} className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <skill.icon className="w-5 h-5 text-orange-primary" />
-                          <span className="font-medium text-gray-700">{skill.name}</span>
-                        </div>
-                        <span className="text-sm text-gray-500">{skill.level}%</span>
+                    <div key={index} className="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                      <div className="p-2 bg-orange-primary/10 rounded-lg">
+                        <skill.icon className="w-5 h-5 text-orange-primary" />
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div 
-                          className="bg-gradient-to-r from-orange-primary to-orange-light h-2 rounded-full transition-all duration-1000 ease-out"
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </div>
+                      <span className="font-medium text-gray-700">{skill.name}</span>
                     </div>
                   ))}
                 </div>

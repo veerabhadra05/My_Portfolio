@@ -30,25 +30,27 @@ const Hero = () => {
             </div>
             
             <p className="text-lg text-gray-500 leading-relaxed max-w-2xl">
-              Passionate about technology and innovation, I'm dedicated to building creative solutions 
+              Driven by technology and innovation, I'm dedicated to building creative solutions 
               through code. Currently pursuing my B.Tech degree while exploring the exciting worlds 
               of data science, web development, and software engineering.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <Button 
-                onClick={scrollToAbout}
-                className="bg-orange-primary hover:bg-orange-dark text-white px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
-              >
-                Explore My Work
-              </Button>
-              <Button 
-                variant="outline"
-                onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="border-orange-primary text-orange-primary hover:bg-orange-primary hover:text-white px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300"
-              >
-                Get In Touch
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full sm:w-auto">
+                <Button 
+                  onClick={scrollToAbout}
+                  className="bg-orange-primary hover:bg-orange-dark text-white px-6 sm:px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
+                >
+                  Explore My Work
+                </Button>
+                <Button 
+                  variant="outline"
+                  onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="border-orange-primary text-orange-primary hover:bg-orange-primary hover:text-white px-6 sm:px-8 py-3 text-lg font-semibold rounded-lg transition-all duration-300"
+                >
+                  Get In Touch
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -68,8 +70,8 @@ const Hero = () => {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 fade-in fade-in-delay-3">
+        {/* Scroll indicator - hidden on mobile to avoid overlap */}
+        <div className="hidden lg:block absolute bottom-8 left-1/2 transform -translate-x-1/2 fade-in fade-in-delay-3">
           <button 
             onClick={scrollToAbout}
             className="animate-bounce text-gray-400 hover:text-orange-primary transition-colors duration-300"

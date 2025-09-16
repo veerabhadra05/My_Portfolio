@@ -22,7 +22,8 @@ const Achievements = () => {
       description: 'Comprehensive certification covering Python fundamentals, data types, control structures, functions, and object-oriented programming concepts.',
       icon: FileText,
       color: 'sky-primary',
-      gradient: 'from-sky-primary to-sky-light'
+      gradient: 'from-sky-primary to-sky-light',
+      verifyUrl: 'https://www.credly.com/badges/c74c919a-096f-489f-b22f-f0202f7bdf6c/linked_in?t=sg1dol'
     },
     {
       title: 'Introduction to Environmental Economics',
@@ -128,9 +129,19 @@ const Achievements = () => {
                         <p className={`text-${cert.color} font-semibold text-sm mb-3`}>
                           Issued by {cert.issuer}
                         </p>
-                        <p className="text-gray-600 text-sm leading-relaxed">
+                        <p className="text-gray-600 text-sm leading-relaxed mb-3">
                           {cert.description}
                         </p>
+                        {cert.verifyUrl && (
+                          <a 
+                            href={cert.verifyUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className={`text-${cert.color} text-sm font-medium hover:underline`}
+                          >
+                            Verify Certificate →
+                          </a>
+                        )}
                       </div>
                     </div>
                   </CardContent>

@@ -46,14 +46,14 @@ const Contact = () => {
     {
       icon: Phone,
       label: 'Phone',
-      value: '+91 7330776100',
+      value: '+91 73307*****',
       href: 'tel:+917330776100',
       color: 'sky-primary'
     },
     {
       icon: MapPin,
       label: 'Location',
-      value: 'Karnataka, India',
+      value: 'Adoni, Andhra Pradesh India',
       href: '#',
       color: 'orange-primary'
     },
@@ -61,7 +61,7 @@ const Contact = () => {
       icon: Linkedin,
       label: 'LinkedIn',
       value: 'Connect with me',
-      href: '#',
+      href: 'https://www.linkedin.com/in/veerabhadrappa-ulthi-5073631b6',
       color: 'sky-primary'
     }
   ];
