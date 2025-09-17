@@ -79,7 +79,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to you (Ulthi)
     const notificationEmailResponse = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
+      from: "Contact Form <contact@yourdomain.com>", // Replace with your verified domain
       to: ["ulthiveera05@gmail.com"], // Your email address
       subject: `New Contact Form Submission from ${name}`,
       html: `
@@ -113,7 +113,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to the person who submitted the form
     const confirmationEmailResponse = await resend.emails.send({
-      from: "Ulthi Veerabhadrappa <onboarding@resend.dev>",
+      from: "Ulthi Veerabhadrappa <noreply@yourdomain.com>", // Replace with your verified domain
       to: [email],
       subject: "Thank you for reaching out!",
       html: `
