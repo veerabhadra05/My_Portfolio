@@ -80,7 +80,7 @@ const Contact = () => {
       icon: MapPin,
       label: 'Location',
       value: 'Adoni, Andhra Pradesh India',
-      href: '#',
+      href: 'https://www.google.com/maps/search/?api=1&query=Adoni%2C+Andhra+Pradesh+India',
       color: 'orange-primary'
     },
     {
