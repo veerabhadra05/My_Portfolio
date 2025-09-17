@@ -114,7 +114,7 @@ const handler = async (req: Request): Promise<Response> => {
     // Send confirmation email to the person who submitted the form
     const confirmationEmailResponse = await resend.emails.send({
       from: "Ulthi Veerabhadrappa <onboarding@resend.dev>",
-      to: ["uilthibadri68@gmail.com"], // Temporarily send to your email
+      to: [email], // Send to the person who submitted the form
       subject: "Thank you for reaching out!",
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
