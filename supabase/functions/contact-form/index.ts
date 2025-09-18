@@ -1,8 +1,5 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2.57.4";
-import { Resend } from "npm:resend@2.0.0";
-
-const resend = new Resend(Deno.env.get("RESEND_API_KEY"));
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -77,70 +74,26 @@ const handler = async (req: Request): Promise<Response> => {
 
     console.log("Contact submission stored:", contactData);
 
-    // Send notification email to you (Ulthi)
-    const notificationEmailResponse = await resend.emails.send({
-      from: "Contact Form <onboarding@resend.dev>",
-      to: ["uilthibadri68@gmail.com"], // Your email address
-      subject: `New Contact Form Submission from ${name}`,
-      html: `
-        <h2>New Contact Form Submission</h2>
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <div style="background-color: #f5f5f5; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #333; margin-top: 0;">Contact Details:</h3>
-            <p><strong>Name:</strong> ${name}</p>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Submission Time:</strong> ${new Date().toLocaleString()}</p>
-          </div>
-          <div style="background-color: #fff; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
-            <h3 style="color: #333; margin-top: 0;">Message:</h3>
-            <p style="line-height: 1.6; color: #555;">${message.replace(/\n/g, '<br>')}</p>
-          </div>
-          <div style="margin-top: 20px; padding: 15px; background-color: #e8f4fd; border-radius: 8px;">
-            <p style="margin: 0; font-size: 14px; color: #666;">
-              This message was sent through your portfolio contact form at ${new Date().toLocaleString()}.
-            </p>
-          </div>
-        </div>
-      `,
+    // Send data to n8n webhook for email handling
+    const webhookResponse = await fetch("https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        message,
+        timestamp: new Date().toISOString(),
+        submissionId: contactData.id
+      }),
     });
 
-    if (notificationEmailResponse.error) {
-      console.error("Failed to send notification email:", notificationEmailResponse.error);
+    if (!webhookResponse.ok) {
+      console.error("Failed to trigger n8n webhook:", webhookResponse.status, webhookResponse.statusText);
       // Still return success since the message was stored in the database
     } else {
-      console.log("Notification email sent successfully:", notificationEmailResponse.data);
-    }
-
-    // Send confirmation email to the person who submitted the form
-    const confirmationEmailResponse = await resend.emails.send({
-      from: "Ulthi Veerabhadrappa <onboarding@resend.dev>",
-      to: [email], // Send to the person who submitted the form
-      subject: "Thank you for reaching out!",
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333;">Thank you for contacting me, ${name}!</h2>
-          <p style="color: #555; line-height: 1.6;">
-            I have received your message and will get back to you as soon as possible. 
-            I appreciate you taking the time to reach out.
-          </p>
-          <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-            <h3 style="color: #333; margin-top: 0;">Your Message:</h3>
-            <p style="color: #666; line-height: 1.6;">"${message}"</p>
-          </div>
-          <p style="color: #555;">
-            Best regards,<br>
-            <strong>Ulthi Veerabhadrappa</strong><br>
-            B.Tech Computer Science & Engineering Student<br>
-            <em>Email: ulthiveera05@gmail.com</em>
-          </p>
-        </div>
-      `,
-    });
-
-    if (confirmationEmailResponse.error) {
-      console.error("Failed to send confirmation email:", confirmationEmailResponse.error);
-    } else {
-      console.log("Confirmation email sent successfully:", confirmationEmailResponse.data);
+      console.log("n8n webhook triggered successfully");
     }
 
     return new Response(
