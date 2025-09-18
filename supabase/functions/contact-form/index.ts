@@ -75,25 +75,51 @@ const handler = async (req: Request): Promise<Response> => {
     console.log("Contact submission stored:", contactData);
 
     // Send data to n8n webhook for email handling
-    const webhookResponse = await fetch("https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        message,
-        timestamp: new Date().toISOString(),
-        submissionId: contactData.id
-      }),
-    });
+    const webhookPayload = {
+      name,
+      email,
+      message,
+      timestamp: new Date().toISOString(),
+      submissionId: contactData.id
+    };
 
-    if (!webhookResponse.ok) {
-      console.error("Failed to trigger n8n webhook:", webhookResponse.status, webhookResponse.statusText);
-      // Still return success since the message was stored in the database
-    } else {
-      console.log("n8n webhook triggered successfully");
+    console.log("Sending webhook payload:", webhookPayload);
+    console.log("Webhook URL:", "https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio");
+
+    try {
+      const webhookResponse = await fetch("https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(webhookPayload),
+      });
+
+      console.log("Webhook response status:", webhookResponse.status);
+      console.log("Webhook response headers:", Object.fromEntries(webhookResponse.headers.entries()));
+      
+      if (!webhookResponse.ok) {
+        const responseText = await webhookResponse.text();
+        console.error("Failed to trigger n8n webhook:", {
+          status: webhookResponse.status,
+          statusText: webhookResponse.statusText,
+          responseBody: responseText,
+          url: "https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio"
+        });
+        // Still return success since the message was stored in the database
+      } else {
+        const responseText = await webhookResponse.text();
+        console.log("n8n webhook triggered successfully:", {
+          status: webhookResponse.status,
+          responseBody: responseText
+        });
+      }
+    } catch (webhookError) {
+      console.error("Error calling n8n webhook:", {
+        error: webhookError.message,
+        stack: webhookError.stack,
+        url: "https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio"
+      });
     }
 
     return new Response(
