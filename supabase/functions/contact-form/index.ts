@@ -84,10 +84,10 @@ const handler = async (req: Request): Promise<Response> => {
     };
 
     console.log("Sending webhook payload:", webhookPayload);
-    console.log("Webhook URL:", "https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio");
+    console.log("Webhook URL:", "https://veerabhadrappa.app.n8n.cloud/webhook/portfolio");
 
     try {
-      const webhookResponse = await fetch("https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio", {
+      const webhookResponse = await fetch("https://veerabhadrappa.app.n8n.cloud/webhook/portfolio", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -104,7 +104,7 @@ const handler = async (req: Request): Promise<Response> => {
           status: webhookResponse.status,
           statusText: webhookResponse.statusText,
           responseBody: responseText,
-          url: "https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio"
+          url: "https://veerabhadrappa.app.n8n.cloud/webhook/portfolio"
         });
         // Still return success since the message was stored in the database
       } else {
@@ -118,7 +118,7 @@ const handler = async (req: Request): Promise<Response> => {
       console.error("Error calling n8n webhook:", {
         error: webhookError.message,
         stack: webhookError.stack,
-        url: "https://veerabhadrappa.app.n8n.cloud/webhook-test/portfolio"
+        url: "https://veerabhadrappa.app.n8n.cloud/webhook/portfolio"
       });
     }
 
